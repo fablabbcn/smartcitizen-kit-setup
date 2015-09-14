@@ -878,7 +878,7 @@ var scktool = {
                 self._getSCKVersion(function(sckVersion) {
                     callback(validateVersion(sckVersion));
                 });
-            }, 6000);
+            }, 4000);
         }
         var retry = function() {
             setTimeout(function() {
