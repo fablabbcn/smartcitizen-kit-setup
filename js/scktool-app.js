@@ -1,6 +1,5 @@
 /*!
  * The Smart Citizen Tool v0.6.0 (http://smartcitizen.me)
- * Proudly based in BabelFish by Codebender
  * 2013-2015 SmartCitizen
  * Licensed under MIT
  */
