@@ -7,9 +7,7 @@
 function debugConnector(message) {
     if (debugLevel > 1) console.log(message); //This is temporary. Will be implemented as log.proto
 }
-debugConnector("BETA version. You are in developer mode!");
 var extensionSet;
-window.codebenderChromeDeveloperMode = true;
 (function e(t, n, r) {
     function s(o, u) {
         if (!n[o]) {
@@ -282,13 +280,10 @@ window.codebenderChromeDeveloperMode = true;
         };
         if (window.chrome && window.chrome.runtime && window.chrome.runtime.id)
             config.extensionId = chrome.runtime.id;
-        if (window.codebenderChromeDeveloperMode)
-            try {
-                module.exports = config;
-                if (window)
-                    window.config = config;
-            } catch (e) {;
-            }
+
+        module.exports = config;
+        if (window) window.config = config;
+
     }, {}],
     3: [function(require, module, exports) {
         function binToHex(bin) {
