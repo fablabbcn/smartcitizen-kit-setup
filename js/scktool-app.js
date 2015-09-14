@@ -1273,7 +1273,7 @@ var scktool = {
         self._checkPermissions();
         self._disconnect();
         self.connected = true;
-        var firmURL = "/firmwares/json/" + self.boards[boardID].firmware.firmwareFile;
+        var firmURL = self.firmwaresPath + self.boards[boardID].firmware.firmwareFile;
         $.getJSON(firmURL, function(firm) {
             self._debug(firm, 3);
             var flash = {
@@ -1586,6 +1586,7 @@ var scktool = {
         return build;
     },
     pluginChromeStoreURL: "https://chrome.google.com/webstore/detail/llohmdkdoablhnefekgllopdgmmphpif",
+    firmwaresPath: "/firmwares/json/",
     lineBuffer: [],
     lineString: "",
     cmdStatus: "NO",
