@@ -1585,16 +1585,7 @@ var scktool = {
         if (patch != 0) return patch;
         return build;
     },
-    Array.prototype.clean: function(deleteValue) {
-        for (var i = 0; i < this.length; i++) {
-            if (this[i] == deleteValue) {
-                this.splice(i, 1);
-                i--;
-            }
-        }
-        return this;
-    },
-    stringNumberProperties: function((obj) {
+    stringNumberProperties: function(obj) {
         for (var property in obj) {
             if (obj.hasOwnProperty(property)) {
                 if (!isNaN(obj[property])) obj[property] = obj[property].toString();
@@ -1899,4 +1890,12 @@ if (typeof Object.create !== 'function') {
     };
 })(jQuery);
 
-
+Array.prototype.clean = function(deleteValue) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == deleteValue) {
+            this.splice(i, 1);
+            i--;
+        }
+    }
+    return this;
+};
