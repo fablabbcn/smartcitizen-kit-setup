@@ -682,20 +682,6 @@ var scktool = {
                     });
                 });
             }
-            /*var boardStarter = function(isBoardOK) {
-                if (isBoardOK) {
-                    self._message("Your kit is a " + self._getBoardDescription() + ".")
-                    self._message("Your kit is running " + self._getFirmwareDescription() + ". This is the latest version.")
-                    self._message("Your Smart Citizen Kit is ready!");
-                    boardReady();
-                } else {
-                    self._message("Your kit is running " + self._getFirmwareDescription());
-                    //self._message("Press Upload Firmware to upgrage the firmware of your Smart Citizen Kit");
-                    self._updateFirmware(function(state) {
-                        if (state) boardReady();
-                    })
-                }
-            }*/
         var boardStarter = function(isBoardOK) {
             self._message("Your kit is a " + self._getBoardDescription());
             if (self.sck.version.firmware < self.latestFirmwareVersion) {
@@ -1469,9 +1455,7 @@ var scktool = {
         self.startUI.createupdatePortSelect();
     },
     _getFire: function() {
-
         var self = this;
-
         self.codebenderPlugin.getPorts(function(portsAvailable) {
             if (portsAvailable != self.oldPorts) {
 
@@ -1889,13 +1873,3 @@ if (typeof Object.create !== 'function') {
         }
     };
 })(jQuery);
-
-Array.prototype.clean = function(deleteValue) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == deleteValue) {
-            this.splice(i, 1);
-            i--;
-        }
-    }
-    return this;
-};
