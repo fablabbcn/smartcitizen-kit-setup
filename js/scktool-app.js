@@ -1217,7 +1217,7 @@ var scktool = {
     _serialWrite: function(msg) {
         var self = this;
         self._debugMessage(msg, "send");
-        self.codebenderPlugin.serialWrite(msg);
+        self.sckTool.serialWrite(msg);
     },
     _serialWriteLn: function(msg) {
         msg += '\r';
@@ -1246,7 +1246,7 @@ var scktool = {
             speed: 115200
         }
         self._debug("...reading! " + JSON.stringify(sck), 2);
-        self.codebenderPlugin.serialRead(sck.port, sck.speed, function(from, line) {
+        self.sckTool.serialRead(sck.port, sck.speed, function(from, line) {
             self._debug("  @@ >> " + from + " " + line);
             self._input(line);
         }, function(from, line) {
@@ -1272,7 +1272,7 @@ var scktool = {
                 disable_flushing: self.boards[boardID].upload.disable_flushing
             }
             self._debug(flash, 2);
-            self.codebenderPlugin.flash(flash.port, flash.binary, flash.maximum_size, flash.protocol, flash.disable_flushing, flash.speed, flash.mcu, function(from, progress) {
+            self.sckTool.flash(flash.port, flash.binary, flash.maximum_size, flash.protocol, flash.disable_flushing, flash.speed, flash.mcu, function(from, progress) {
                 self._debug(from, 3);
                 self._debug(progress, 3);
                 self.isFlashing = false;
@@ -1280,7 +1280,7 @@ var scktool = {
                     self._debug("FLASH PROGRESS");
                     self._debug(progress);
                     if (progress != 0 && (progress > -1 || progress < -23) && progress != -30 && progress != -55 && progress != -56 && progress != -57) {
-                        self.codebenderPlugin.codebenderPlugin.getFlashResult(function(result) {
+                        self.sckTool.sckTool.getFlashResult(function(result) {
                             self._debug("FLASH RESULT");
                             self._debug(result);
                         });
@@ -1412,7 +1412,7 @@ var scktool = {
     _scan: function() {
         var self = this;
         self._debug("HASPERM...");
-        self.hasPerm = self.codebenderPlugin.setCallback(function(from, output) {
+        self.hasPerm = self.sckTool.setCallback(function(from, output) {
             if (output == "disconnect") {
                 if (self.isFlashing) {
                     self._debug("Disconnected by plugin request", 1);
@@ -1456,7 +1456,7 @@ var scktool = {
     },
     _getFire: function() {
         var self = this;
-        self.codebenderPlugin.getPorts(function(portsAvailable) {
+        self.sckTool.getPorts(function(portsAvailable) {
             if (portsAvailable != self.oldPorts) {
 
                 var jsonPorts = $.parseJSON(portsAvailable);
@@ -1475,7 +1475,7 @@ var scktool = {
         var self = this;
         self._debug("disconnecting!", 2);
         self.connected = false;
-        self.codebenderPlugin.serialMonitorSetStatus();
+        self.sckTool.serialMonitorSetStatus();
 
     },
     _checkPermissions: function() {
@@ -1516,10 +1516,10 @@ var scktool = {
         var self = this;
         $('head').append('<link rel="chrome-webstore-item" href="' + self.pluginChromeStoreURL + '">');
         if (window.chrome && !self._isMobile()) {
-            self.codebenderPlugin = new window.Scktoolapp();
-            self.codebenderPlugin.getVersion(function(version) {
+            self.sckTool = new window.SckToolChromeAppConnector();
+            self.sckTool.getVersion(function(version) {
                 if (!version.hasOwnProperty("error")) {
-                    self.codebenderPlugin.init(function() {
+                    self.sckTool.init(function() {
                         self._enableUSB();
                         self._debug(version, 1);
                         self._debug("Plugin installed and ready");

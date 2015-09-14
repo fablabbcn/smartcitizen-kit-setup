@@ -14431,10 +14431,10 @@ window.codebenderChromeDeveloperMode = true;
         // file: chrome-loader.js
         var _create_chrome_client = require('./../chrome-extension/client/rpc-client');
         if (_create_chrome_client.extentionAvailable) {
-            window.Scktoolapp = require('./chrome-plugin');
+            window.SckToolChromeAppConnector = require('./chrome-plugin');
         }
 
-        if (!window.Scktoolapp) {
+        if (!window.SckToolChromeAppConnector) {
             debugConnector("No chrome app.");
         }
 
