@@ -1499,10 +1499,7 @@ var scktool = {
         if ((navigator.appVersion.indexOf("X11") != -1) || (navigator.appVersion.indexOf("Linux") != -1)) {
             var message = 'If you have issues connecting with your kit on Linux ensure you have the appropiate permissions to access the serial port. You can quickly solve this by installing the latest Arduino IDE <i>(sudo apt-get install arduino arduino-core)</i> or manually following this <a target=\"_blank\" href=\"http://codebender.uservoice.com/knowledgebase/articles/95620-my-arduino-is-not-recognized-by-codebender-what-s"\">guide</a>.';
             self._message(message);
-        } else if (navigator.appVersion.indexOf("MSIE") != -1) {
-            var message = 'If you have issues connecting with you kit you need to disable the <strong>Protected Mode</strong> to communicate with yout Smart Citizen kit. <a target=\"_blank\" href=\"https://codebender.uservoice.com/knowledgebase/articles/188530-running-the-codebender-plugin-on-internet-explorer\">Learn More</a>.';
-            self._message(message);
-        }
+        } 
     },
     initPluginAuto: function(pluginReady) {
         var self = this;
