@@ -1016,7 +1016,7 @@ var scktool = {
     },
     _setSCKUpdates: function(update, callback) {
         var self = this;
-        update = stringNumberProperties(update);
+        update = self.stringNumberProperties(update);
         self._enterCmdMode(function() {
             self._sendCMD("set time update " + update.time, function(data) {
                 self._sendCMD("set number updates " + update.updates, function(data) {
@@ -1585,6 +1585,23 @@ var scktool = {
         if (patch != 0) return patch;
         return build;
     },
+    Array.prototype.clean: function(deleteValue) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == deleteValue) {
+                this.splice(i, 1);
+                i--;
+            }
+        }
+        return this;
+    },
+    stringNumberProperties: function((obj) {
+        for (var property in obj) {
+            if (obj.hasOwnProperty(property)) {
+                if (!isNaN(obj[property])) obj[property] = obj[property].toString();
+            }
+        }
+        return obj;
+    },
     pluginChromeStoreURL: "https://chrome.google.com/webstore/detail/llohmdkdoablhnefekgllopdgmmphpif",
     firmwaresPath: "/firmwares/json/",
     lineBuffer: [],
@@ -1883,28 +1900,3 @@ if (typeof Object.create !== 'function') {
 })(jQuery);
 
 
-
-/* EXTRA FUNC  */
-
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-Array.prototype.clean = function(deleteValue) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == deleteValue) {
-            this.splice(i, 1);
-            i--;
-        }
-    }
-    return this;
-};
-
-function stringNumberProperties(obj) {
-    for (var property in obj) {
-        if (obj.hasOwnProperty(property)) {
-            if (!isNaN(obj[property])) obj[property] = obj[property].toString();
-        }
-    }
-    return obj;
-};
