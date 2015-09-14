@@ -1,6 +1,6 @@
 /*!
  * The Smart Citizen Tool v0.6.0 (http://smartcitizen.me)
- * Proudly based in BabelFish by Codebender 
+ * Proudly based in BabelFish by Codebender
  * 2013-2015 SmartCitizen
  * Licensed under MIT
  */
@@ -11,7 +11,7 @@ var scktool = {
         this.options = $.extend({}, this.options, options);
         this.elem = elem;
         this.$elem = $(elem);
-        this.debugLevel = debugLevel
+        this.debugLevel = debugLevel;
         this._build();
         return this;
     },
@@ -31,7 +31,6 @@ var scktool = {
     },
     _initEvents: function() {
         var self = this;
-
         window.onbeforeunload = function() {
             self._disconnect();
         };
@@ -106,9 +105,9 @@ var scktool = {
                 var label = $('<label>').text(labelTxt).attr('for', name);
                 var input = label.append(input);
             }
-            
+
             return this.createInputWrapper(type).append(input);
-            
+
         }
 
         _UI.createInputWrapper = function(type) {
@@ -142,14 +141,14 @@ var scktool = {
         _UI.createRangeElement = function(name, value, step, min, max, labelTxt) {
             var range = $('<input>').val(value).attr('name', name);
             range.prop("type", "range").prop("step", step).prop("min", min).prop("max", max).css('width', '220px');
-            
+
             if (labelTxt) {
                 var label = $('<label>').text(labelTxt).attr('for', name);
                 var range = label.append(range);
             }
-            
+
             return this.createInputWrapper('range').append(range);
-            
+
         }
         _UI.remove = function() {
             if (!this.widget) return;
@@ -371,7 +370,7 @@ var scktool = {
             right.append(rightElements);
             left.appendTo(this.widget);
             right.appendTo(this.widget);
-            $('input[type="range"]').rangeslider(); //tmp               
+            $('input[type="range"]').rangeslider(); //tmp
         }
         _updatesUI.setSensorResolution = function(value) {
             this.setRangeElement("resolution", value)
@@ -738,7 +737,7 @@ var scktool = {
             });
         }
         var validateMac = function(mac) {
-            var regex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
+            var regex = /^(([a-f0-9]{2}:){5}[a-f0-9]{2},?)+$/i;
             return regex.test(mac);
         }
         var platformResponse = function(mac, status) {
@@ -783,18 +782,12 @@ var scktool = {
     },
     _userStart: function(callback) {
         var self = this;
-
         self.startUI.createStartElement(callback); //self._run
 
         self._windowsDriversWarning();
 
-        //  setTimeout(function() {
         self._message("Please, reset your kit by pressing the reset button or switching it off / on.");
-        //   setTimeout(function() {
         self._message("Once reseted, select your SmartCitizen serial port and click Start process...");
-        //   }, 4000);
-        // }, 4000);
-
     },
     _windowsDriversWarning: function() {
         if (navigator.platform.toLowerCase().indexOf("win") != -1) {
@@ -978,8 +971,6 @@ var scktool = {
         var setAndgetSCKUpdates = function(callback) {
             self._setSCKUpdates(update, function(sentUpdate) {
                 self._getSCKUpdates(function(receiveUpdate) {
-                    // cosole.warn(sentUpdate);
-                    // cosole.warn(receiveUpdate);
                     self._debug(sentUpdate, 2);
                     self._debug(receiveUpdate, 2);
                     if (validateSet(sentUpdate, receiveUpdate)) {
@@ -1439,7 +1430,6 @@ var scktool = {
             if (output == "disconnect") {
                 if (self.isFlashing) {
                     self._debug("Disconnected by plugin request", 1);
-                    //self._disconnect();
                 }
             } else {
                 output = output.replace(/Leonardo/g, "");
@@ -1481,7 +1471,6 @@ var scktool = {
     _getFire: function() {
 
         var self = this;
-        // try {
 
         self.codebenderPlugin.getPorts(function(portsAvailable) {
             if (portsAvailable != self.oldPorts) {
@@ -1497,14 +1486,6 @@ var scktool = {
                 self.oldPorts = portsAvailable;
             }
         });
-
-
-
-
-        // } catch (error) {
-        //  self._debug(error, 2);
-        //     self.oldPorts = self.ports;
-        // }
     },
     _disconnect: function() {
         var self = this;
@@ -1573,14 +1554,6 @@ var scktool = {
             callback(false);
         }
     },
-    _searchFirefox: function() {
-        for (var i = 0; i < navigator.plugins.length; i++) {
-            if (navigator.plugins[i].name == "Codebender.cc" || navigator.plugins[i].name == "Codebendercc") {
-                return true;
-            }
-        }
-        return false;
-    },
     _addPluginConnector: function() {
         var connector = '<object id="codebender-plugin" type="application/x-codebendercc" width="0" height="0" xmlns="http://www.w3.org/1999/html"></object>';
         this.$elem.append(connector);
@@ -1605,7 +1578,7 @@ var scktool = {
             build: bui
         }
     },
-    _comparePluginVersions: function(firstVersion, secondVersion) {
+    _compareExtensionVersions: function(firstVersion, secondVersion) {
         var major = firstVersion.major - secondVersion.major;
         var minor = firstVersion.minor - secondVersion.minor;
         var patch = firstVersion.patch - secondVersion.patch;
