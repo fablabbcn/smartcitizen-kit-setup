@@ -777,7 +777,7 @@ var scktool = {
     },
     _windowsDriversWarning: function() {
         if (navigator.platform.toLowerCase().indexOf("win") != -1) {
-            this._message("Remember on Windows you need the Arduino drivers to be installed, you can easily follow this <a  target='_blank' href='https://codebender.cc/static/walkthrough/page/1'>guide</a>");
+            this._message("Remember on Windows you need the Arduino drivers to be installed, you can easily follow this <a  target='_blank' href='http://docs.smartcitizen.me/#/start/how-to-install-the-drivers-on-windows'>guide</a>");
         }
     },
     _checkVersion: function(callback) {
@@ -1534,10 +1534,6 @@ var scktool = {
             self._debug("Plugin not supported on this browser");
             callback(false);
         }
-    },
-    _addPluginConnector: function() {
-        var connector = '<object id="codebender-plugin" type="application/x-codebendercc" width="0" height="0" xmlns="http://www.w3.org/1999/html"></object>';
-        this.$elem.append(connector);
     },
     _isMobile: function() {
         return navigator.userAgent.match(/Android/i) ? true : false || navigator.userAgent.match(/BlackBerry/i) ? true : false || navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false || navigator.userAgent.match(/IEMobile/i) ? true : false;
