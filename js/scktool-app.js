@@ -1407,7 +1407,7 @@ var scktool = {
         this.oldPorts = "";
         window.setTimeout(function() {
             self._scan();
-        }, 1000);
+        }, 500);
     },
     _scan: function() {
         var self = this;
@@ -1494,7 +1494,7 @@ var scktool = {
             } else if (status == "available") {
                 self._startmessage('<strong>Preparing the installation...</strong>');
                 self._startmessage('<strong>To configure your kit you will need to install the Smart Citizen Kit App for Chrome<button id="install-button">Add to Chrome</button></strong>You can also install it manually from the <a href="' +  self.pluginChromeStoreURL + '" target="_blank">Chrome store</a> and refresh the page.');
-                $('#install-button').click(function() {
+                self.$elem.find('#install-button').click(function() {
                     chrome.webstore.install(self.pluginChromeStoreURL, function() {
                         self._startmessage('<strong>Finishing the installation...</strong>');
                         setTimeout(function() {
