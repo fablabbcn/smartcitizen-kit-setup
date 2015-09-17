@@ -1,3 +1,3 @@
 $(document).ready(function() {
-	 $("#setuptool").scktool();
+	 $("#setuptool").sckapp();
 });

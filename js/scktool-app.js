@@ -5,7 +5,7 @@
  */
 var debugLevel = 0; // 0 no messages, 5 all messages
 
-var scktool = {
+var sckapp = {
     init: function(options, elem) {
         this.options = $.extend({}, this.options, options);
         this.elem = elem;
@@ -1858,12 +1858,12 @@ if (typeof Object.create !== 'function') {
 }
 (function($) {
     // Start a plugin
-    $.fn.scktool = function(options) {
+    $.fn.sckapp = function(options) {
         if (this.length) {
             return this.each(function() {
-                var myscktool = Object.create(scktool);
-                myscktool.init(options, this); // `this` refers to the element
-                $.data(this, 'scktool', myscktool);
+                var mysckapp = Object.create(sckapp);
+                mysckapp.init(options, this); // `this` refers to the element
+                $.data(this, 'sckapp', mysckapp);
             });
         }
     };
