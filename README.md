@@ -9,3 +9,13 @@ This requires the Smart Citizen Chrome Extension available at the [Chrome Store]
 [http://setup.smartcitizen.me/](http://setup.smartcitizen.me/)
 
 *This requires the Smart Citizen Kit app version 0.1.1.5 or greater.*
+
+### How it works?
+
+* `scktool-connector.js` is a link between the `RPC`client and the 
+
+
+
+
+*For more info on the Chrome App check the BabelFish [README](https://github.com/fablabbcn/BabelFish/blob/master/README.md).*
+

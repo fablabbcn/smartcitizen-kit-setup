@@ -1,7 +1,8 @@
 /*!
  * The Smart Citizen Tool v0.8.0 (http://smartcitizen.me)
- * scktool-connector.js is proudly based in BabelFish by Codebender.cc
- * 2013-2015 SmartCitizen
+ * scktool-connector.js is proudly based in BabelFish by Codebender.cc 
+ * 2015 Codebender.cc - BabelFish https://github.com/fablabbcn/BabelFish
+ * 2015 SmartCitizen
  * Licensed under MIT
  */
 function debugConnector(message) {

@@ -75,12 +75,12 @@ var scktool = {
     initBlocksUI: function() {
         this.$elem.addClass("scktool");
         this.$elem.append([
-            $("div").addClass("start-message"),
-            $("div").addClass("start-block"),
-            $("div").addClass("messages-block"),
-            $("div").addClass("board-block"),
-            $("div").addClass("config-block"),
-            $("div").addClass("credits-block").html('<p>Powered by <a target="_blank" href="https://github.com/fablabbcn/BabelFish"> BabelFish</a> technology by <a target="_blank" href="http://codebender.cc/">Condebender</a>.</p>')
+            $("<div>").addClass("start-message"),
+            $("<div>").addClass("start-block"),
+            $("<div>").addClass("messages-block"),
+            $("<div>").addClass("board-block"),
+            $("<div>").addClass("config-block"),
+            $("<div>").addClass("credits-block").html('<p>Powered by <a target="_blank" href="https://github.com/fablabbcn/BabelFish"> BabelFish</a> technology by <a target="_blank" href="http://codebender.cc/">Condebender</a>.</p>')
         ]);
     },
     initInternalUI: function() {
