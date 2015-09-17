@@ -3,7 +3,7 @@
  * 2013-2015 SmartCitizen
  * Licensed under MIT
  */
-var debugLevel = 0; // 0 no messages, 5 all messages
+var debugLevel = 5; // 0 no messages, 5 all messages
 
 var sckapp = {
     init: function(options, elem) {
@@ -82,6 +82,11 @@ var sckapp = {
             $("<div>").addClass("config-block"),
             $("<div>").addClass("credits-block").html('<p>Powered by <a target="_blank" href="https://github.com/fablabbcn/BabelFish"> BabelFish</a> technology by <a target="_blank" href="http://codebender.cc/">Condebender</a>.</p>')
         ]);
+    },
+    resetProcess: function(){
+        this.$elem.find(".board-block").children().remove();
+        this.$elem.find(".config-block").children().remove();
+        this.initInternalUI();
     },
     initInternalUI: function() {
         this.updatesUI = this.initUpdatesUI();
@@ -524,9 +529,7 @@ var sckapp = {
         }
 
         _configUI.createWidgetWrapper = function(name, title, description, trigger, extraTrigger) {
-            if (!self.temp_block_upload) {
-                self.temp_block_upload = this.createWidgetsWrapper(trigger, extraTrigger);
-            }
+            self.temp_block_upload = this.createWidgetsWrapper(trigger, extraTrigger);
             var section = $('<div>').addClass('section').addClass(name);
             var title = $('<h4>').text(title);
             var description = $('<p>').text(description);
@@ -694,7 +697,14 @@ var sckapp = {
                 if (state) boardReady();
             });
         }
+
         self._userStart(function() {
+            if(self.isAlreadyStarted){
+                self.resetProcess();
+
+            } else {
+                self.isAlreadyStarted = true;
+            }
             self._message("Checking your Smart Citizen Kit version. This could take a while, please wait.");
             self._checkVersion(function(isBoardOK) {
                 boardStarter(isBoardOK);
@@ -736,24 +746,15 @@ var sckapp = {
                 self._message("Registered to the Platform failed, please check your internet connection!");
             }
         }
-        var registerToPlatform = function(mac, callback) {
-            /* Here will go the ajax */
-            //platformResponse(mac, 1);
-            updatePageForm(mac);
-            callback();
-        }
 
-        var updatePageForm = function(mac) {
-            $("#DeviceMacadress").val(mac);
-            $('#register input[type="submit"]').removeAttr('disabled');
-        }
 
         var register = function() {
+            
             getMac(function(mac) {
                 if (mac) {
-                    registerToPlatform(mac, function() {
-                        callback();
-                    });
+                    self.sck.mac = mac;
+                    self._sendUpdateEvent();
+                    callback();
                 } else {
                     self._message("Failed to get the mac address from the kit. Try again later!");
                     callback();
@@ -761,6 +762,11 @@ var sckapp = {
             });
         }
         register();
+    },
+    _sendUpdateEvent: function() {
+        var self = this;
+        self._debug(self.sck);
+        self.$elem.trigger('sck_info', [self.sck]);
     },
     _startConfigManager: function(callback) {
         this._startGetAll();
