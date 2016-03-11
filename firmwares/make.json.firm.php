@@ -1,8 +1,8 @@
 <?php
 
-$projectName = "sck_beta_k.1.0_v.0.8.6.json";
+$projectName = "sck_beta_k.1.0_v.0.9.0.json";
 
-$arduinoCompilerELF= "/var/folders/0w/z91mcwks11b_r7x7rcd_bbbr0000gn/T/build2618069299824673333.tmp/sck_beta_v0_8_5.cpp.elf";
+$arduinoCompilerELF= "/var/folders/0w/z91mcwks11b_r7x7rcd_bbbr0000gn/T/build7869240854402068297.tmp/sck_beta_v0_9.cpp.elf";
  
 $objCopyPath = "/Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/avr-objcopy";
 
