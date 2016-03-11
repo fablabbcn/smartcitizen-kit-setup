@@ -1,12 +1,16 @@
 <?php
 
-$projectName = "sck_beta_k.1.1_v.0.9.0";
+$projectName = "sck_beta_k.1.0_v.0.9.0";
 
-$arduinoCompilerELF= "/var/folders/0w/z91mcwks11b_r7x7rcd_bbbr0000gn/T/build7869240854402068297.tmp/sck_beta_v0_9.cpp.elf";
+$arduinoCompilerELF= "/var/folders/0w/z91mcwks11b_r7x7rcd_bbbr0000gn/T/build8062923371537935489.tmp/sck_beta_v0_9.cpp.elf";
  
 $objCopyPath = "/Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/avr-objcopy";
 
 $localtempfolder = "temp";
+
+if (!file_exists($localtempfolder)) {
+    mkdir($localtempfolder, 0777, true);
+}
 
 $binfile =  $localtempfolder . "/bin_temp.bin";
 
